@@ -90,10 +90,3 @@ See also the list of [contributors](https://github.com/ModyQyW/vue-vuetify-admin
 [MIT](./LICENSE)
 
 Copyright (c) 2019-present ModyQyW
-
-## Acknowledgments
-
-- [vue-element-admin](https://github.com/PanJiaChen/vue-element-admin)
-- [iview-admin](https://github.com/iview/iview-admin)
-- [ant-design-pro-vue](https://github.com/sendya/ant-design-pro-vue)
-- [d2-admin](https://github.com/d2-projects/d2-admin)
