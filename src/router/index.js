@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '@/views/home'
-import About from '@/views/about'
-import Exception from '@/views/exception'
+import Home from '@v/home'
+import About from '@v/about'
+import Exception from '@v/exception'
 
 Vue.use(Router)
 

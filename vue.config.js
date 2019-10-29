@@ -53,6 +53,7 @@ module.exports = {
       .set('@m', path.resolve(__dirname, 'src', 'mixins'))
       .set('@u', path.resolve(__dirname, 'src', 'utils'))
       .set('@p', path.resolve(__dirname, 'src', 'plugins'))
+      .set('@v', path.resolve(__dirname, 'src', 'views'))
     // split chunks
     config.when(
       isProd,

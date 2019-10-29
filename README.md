@@ -1,6 +1,6 @@
 # vue2-todo-list-demo
 
-A todo list demo for new Vuer, built with vue, vue-router, and element-ui.
+A todo list demo for new Vuer, initialled by vue-cli 4 and built with vue 2, vue-router 3, element-ui 2 and dayjs 1.
 
 ## Getting Started
 
@@ -16,9 +16,9 @@ These instructions will get you a copy of the project up and running on your loc
   - Then install node lts in terminal / command line
 
     ```sh
-    # for now, lts version is 10.16.3
-    # last updated: 2019.09.17
-    nvm install 10.16.3
+    # for now, lts version is 12.13.0
+    # last updated: 2019.10.29
+    nvm install 12.13.0
     ```
 
   - Globally update npm to lts and install yarn
