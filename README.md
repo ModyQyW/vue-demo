@@ -70,21 +70,13 @@ No tests now. Pull requests are welcome.
 
 ## Browsers Support
 
-Please read [.browerslistrc](./.browserslistrc) for details. You can get actual supported browsers [browserl.ist](https://browserl.ist).
-
-## Contributing
-
-Please read [CONTRIBUTING.md](./CONTRIBUTING.md) for details on code of conduct, and the process for submitting pull requests.
-
-## Versioning
-
-Use [SemVer](http://semver.org/) for versioning. For the versions available, see the [releases on this repository](https://github.com/ModyQyW/vue-vuetify-admin/releases).
+Please read [package.json](./package.json) for details. You can get actual supported browsers on [browserl.ist](https://browserl.ist).
 
 ## Authors
 
 - **Rui Wu** - *Initial work* - [ModyQyW](https://github.com/ModyQyW)
 
-See also the list of [contributors](https://github.com/ModyQyW/vue-vuetify-admin/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/ModyQyW/vue2-todo-list-demo/contributors) who participated in this project.
 
 ## License
 
