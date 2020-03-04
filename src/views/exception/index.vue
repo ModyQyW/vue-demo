@@ -1,5 +1,5 @@
 <template>
-  <el-main style="display: flex; align-items: center; justify-content: center;">
+  <el-main class="d-flex align-center justify-center">
     <el-row>Nothing here!</el-row>
   </el-main>
 </template>

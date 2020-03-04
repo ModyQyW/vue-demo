@@ -11,7 +11,7 @@
       >
         <h4>Add Form</h4>
         <add-form
-          @add="handleAddTodo"
+          @add-todo="handleAddTodo"
           ref="addForm"
         />
       </el-col>
@@ -20,10 +20,12 @@
         style="max-height: 100%;"
       >
         <h4>Todo List</h4>
-        <todo-list
-          :todo="todo"
-          @done="handleDone"
+        <show-list
+          type="todo"
+          :list="todoList"
+          @done="handleAddDone"
           @remove="handleRemove"
+          @clear="handleClear"
         />
       </el-col>
       <el-col
@@ -31,150 +33,89 @@
         style="max-height: 100%;"
       >
         <h4>Done List</h4>
-        <done-list
-          :done="done"
+        <show-list
+          type="done"
+          :list="doneList"
           @remove="handleRemove"
+          @clear="handleClear"
         />
       </el-col>
-    </el-row>
-    <el-row
-      type="flex"
-      justify="center"
-      style="margin-top: 8px;"
-    >
-      <el-button
-        type="danger"
-        @click="handleClear"
-      >
-        Clear All
-      </el-button>
-    </el-row>
-    <el-row
-      type="flex"
-      align="middle"
-      justify="center"
-      style="margin-top: 8px;"
-    >
-      <span>Check Interval: </span>
-      <el-select
-        v-model="interval"
-        @change="handleChangeInterval"
-      >
-        <el-option
-          v-for="interval in intervalOptions"
-          :key="interval.value"
-          :label="interval.label"
-          :value="interval.value">
-        </el-option>
-      </el-select>
     </el-row>
   </el-main>
 </template>
 
 <script>
 import dayjs from 'dayjs'
-import storage from '@u/storage'
+import { get, set, remove } from '@u/storage'
 import AddForm from './components/AddForm'
-import TodoList from './components/TodoList'
-import DoneList from './components/DoneList'
+import ShowList from './components/ShowList'
 
 export default {
   name: 'home',
   components: {
     AddForm,
-    TodoList,
-    DoneList
+    ShowList
   },
   data () {
+    const todoListKey = 'todoList'
+    const doneListKey = 'doneList'
     return {
-      todo: storage.get('todo').value || [],
-      done: storage.get('done').value || [],
-      interval: storage.get('interval').value || 180000,
-      intervalTimer: null,
-      intervalOptions: [
-        {
-          label: '1 min',
-          value: 60000
-        }, {
-          label: '3 min',
-          value: 180000
-        }, {
-          label: '5 min',
-          value: 300000
-        }, {
-          label: '10 min',
-          value: 600000
-        }, {
-          label: '15 min',
-          value: 900000
-        }, {
-          label: '30 min',
-          value: 1800000
-        }
-      ]
+      todoListKey,
+      doneListKey,
+      todoList: get(todoListKey).data || [],
+      doneList: get(doneListKey).data || []
     }
   },
-  mounted () {
-    this.handleSetIntervalTimer()
-  },
   methods: {
-    handleSetIntervalTimer () {
-      if (this.intervalTimer) {
-        clearInterval(this.intervalTimer)
-      }
-      this.handleCheckOutdated()
-      this.intervalTimer = setInterval(() => {
-        this.handleCheckOutdated()
-      }, this.interval)
-    },
-    handleCheckOutdated () {
-      const now = Date.now()
-      let todoLen = this.todo.length
-      for (let i = 0; i < todoLen; i += 1) {
-        if (this.todo[i].deadline <= now) {
-          this.$notify({
-            title: 'Warning',
-            message: `${this.todo[i].title} Deadline! Detail: ${this.todo[i].detail}. Deadline: ${dayjs(this.todo[i].deadline).format('YYYY-MM-DD HH:mm:ss')}.`,
-            duration: 0,
-            type: 'warning'
-          })
-          this.handleRemove({ type: 'todo', index: i })
-          todoLen -= 1
-          i -= 1
-        }
-      }
-    },
     handleAddTodo (payload) {
-      const newTodo = { ...payload, timestamp: Date.now() }
-      this.todo.push(newTodo)
-      const res = storage.set('todo', JSON.stringify(this.todo))
-      if (!res.suc) {
-        this.$alert(res.msg, 'Error').then(function () {}).catch(function () {})
-      } else {
+      const newTodo = {
+        ...payload,
+        timestamp: dayjs().valueOf()
+      }
+      this.todoList.push(newTodo)
+      const res = set(this.todoListKey, this.todoList)
+      if (res.success) {
         this.$message({
-          message: 'Add successfully',
+          message: 'Add successfully.',
           type: 'success'
         })
-        this.$refs.addForm.handleResetForm()
+      } else {
+        this.$alert(res.message, 'Failed')
+          .then(() => {})
+          .catch(() => {})
       }
     },
-    handleClear () {
-      this.todo = []
-      this.done = []
-      storage.clear()
+    handleClear (payload) {
+      const { type } = payload
+      switch (type) {
+        case 'todo':
+          this.todoList = []
+          remove(this.todoListKey)
+          break
+        case 'done':
+          this.doneList = []
+          remove(this.doneListKey)
+          break
+        default:
+          break
+      }
     },
-    handleDone (payload) {
-      const newDone = this.todo.shift()
-      this.done.push(newDone)
-      const res1 = storage.set('todo', JSON.stringify(this.todo))
-      const res2 = storage.set('done', JSON.stringify(this.done))
-      if (!res1.suc) {
-        this.$alert(res1.msg, 'Error').then(function () {}).catch(function () {})
-      } else if (!res2.suc) {
-        this.$alert(res1.msg, 'Error').then(function () {}).catch(function () {})
+    handleAddDone (payload) {
+      const newDone = this.todoList.shift()
+      this.doneList.push(newDone)
+      const res1 = set(this.todoListKey, this.todoList)
+      const res2 = set(this.doneListKey, this.doneList)
+      if (!res1.success) {
+        this.$alert(res1.message, 'Error')
+          .then(() => {})
+          .catch(() => {})
+      } else if (!res2.success) {
+        this.$alert(res2.message, 'Error')
+          .then(() => {})
+          .catch(() => {})
       } else {
         this.$message({
-          message: 'Done successfully',
+          message: 'Done successfully.',
           type: 'success'
         })
       }
@@ -184,36 +125,26 @@ export default {
       let res
       switch (type) {
         case 'todo':
-          this.todo.splice(index, 1)
-          res = storage.set('todo', JSON.stringify(this.todo))
+          this.todoList.splice(index, 1)
+          res = set(this.todoListKey, this.todoList)
           break
         case 'done':
-          this.done.splice(index, 1)
-          res = storage.set('done', JSON.stringify(this.done))
+          this.doneList.splice(index, 1)
+          res = set(this.doneListKey, this.doneList)
           break
         default:
           break
       }
-      if (!res.suc) {
-        this.$alert(res.msg, 'Error').then(function () {}).catch(function () {})
+      if (!res.success) {
+        this.$alert(res.message, 'Error')
+          .then(() => {})
+          .catch(() => {})
       } else {
         this.$message({
-          message: 'Remove successfully',
+          message: 'Remove successfully.',
           type: 'success'
         })
       }
-    },
-    handleChangeInterval (interval) {
-      const res = storage.set('interval', JSON.stringify(interval))
-      if (!res.suc) {
-        this.$alert(res.msg, 'Error').then(function () {}).catch(function () {})
-      } else {
-        this.$message({
-          message: 'Set interval successfully',
-          type: 'success'
-        })
-      }
-      this.handleSetIntervalTimer()
     }
   }
 }

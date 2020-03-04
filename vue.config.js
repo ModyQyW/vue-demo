@@ -53,7 +53,8 @@ module.exports = {
     config.plugins.push(
       // stylelint
       new StylelintWebpackPlugin({
-        files: ['src/**/*.{vue,htm,html,css,sss,less,scss}'],
+        files: ['src/**/*.{vue,htm,html,sass,scss}'],
+        fix: true,
         formatter: require('stylelint-codeframe-formatter')
       })
     )

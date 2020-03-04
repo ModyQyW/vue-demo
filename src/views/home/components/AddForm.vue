@@ -4,42 +4,52 @@
     :rules="addFormRules"
     label-position="left"
     ref="addForm"
-    label-width="100px"
+    label-width="80px"
   >
-    <el-form-item label="Title" prop="title" required>
+    <el-form-item
+      label="Title"
+      prop="title"
+      required
+    >
       <el-input
         v-model="addForm.title"
+        show-word-limit
+        maxlength="20"
         clearable
-        placeholder="Todo in short, less than 20"
       />
     </el-form-item>
-    <el-form-item label="Detail" prop="detail" required>
+    <el-form-item
+      label="Detail"
+      prop="detail"
+      required
+    >
       <el-input
         type="textarea"
         v-model="addForm.detail"
         :rows="8"
         resize="none"
+        show-word-limit
+        maxlength="100"
         clearable
-        placeholder="Detail for the todo, less than 100"
       />
     </el-form-item>
-    <el-form-item label="Deadline" prop="deadline" required>
-      <el-date-picker
-        v-model="addForm.deadline"
-        type="datetime"
-        placeholder="Pick deadline"
-        value-format="timestamp"
-        :picker-options="datepickerOptions"
-      />
-    </el-form-item>
-    <el-form-item label-width="0" style="text-align: center;">
+    <el-form-item
+      label-width="0"
+      class="text-center"
+    >
       <el-button
         type="primary"
+        size="mini"
         @click="handleSubmitForm"
       >
         Add
       </el-button>
-      <el-button @click="handleResetForm">Reset</el-button>
+      <el-button
+        size="mini"
+        @click="handleResetForm"
+      >
+        Reset
+      </el-button>
     </el-form-item>
   </el-form>
 </template>
@@ -50,8 +60,7 @@ export default {
     return {
       addForm: {
         title: '',
-        detail: '',
-        deadline: ''
+        detail: ''
       },
       addFormRules: {
         title: [
@@ -61,15 +70,7 @@ export default {
         detail: [
           { required: true, message: 'Please set todo detail', trigger: 'change' },
           { max: 100, message: 'Should less than 100', trigger: 'blur' }
-        ],
-        deadline: [
-          { type: 'date', required: true, message: 'Please set deadline', trigger: 'change' }
         ]
-      },
-      datepickerOptions: {
-        disabledDate (time) {
-          return time.getTime() < Date.now()
-        }
       }
     }
   },
@@ -77,10 +78,8 @@ export default {
     handleSubmitForm () {
       this.$refs.addForm.validate((valid) => {
         if (valid) {
-          this.$emit('add', this.addForm)
-          return true
-        } else {
-          return false
+          this.$emit('add-todo', this.addForm)
+          this.handleResetForm()
         }
       })
     },

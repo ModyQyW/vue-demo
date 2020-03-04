@@ -1,21 +1,23 @@
 <template>
   <el-card style="max-height: calc(100% - 64px); overflow: hidden auto;">
-    <template v-if="done.length > 0">
-      <list-item
-        v-for="(item, index) in done"
+    <template v-if="list.length > 0">
+      <show-list-item
+        v-for="(item, index) in list"
         :key="item.timestamp"
         :item="item"
         :index="index"
-        :type="'done'"
+        :type="type"
+        @done="handleDone"
         @remove="handleRemove"
       />
       <el-row
         type="flex"
         justify="center"
-        style="margin-top: 8px;"
+        style="margin-top: 24px;"
       >
         <el-button
           type="danger"
+          size="mini"
           @click="handleClear"
         >
           Clear
@@ -29,19 +31,27 @@
 </template>
 
 <script>
-import ListItem from './ListItem'
+import ShowListItem from './ShowListItem'
 
 export default {
+  name: 'ShowList',
   components: {
-    ListItem
+    ShowListItem
   },
   props: {
-    done: {
+    type: {
+      type: String,
+      required: true
+    },
+    list: {
       type: Array,
       required: true
     }
   },
   methods: {
+    handleDone (payload) {
+      this.$emit('done', payload)
+    },
     handleRemove (payload) {
       this.$emit('remove', payload)
     },
