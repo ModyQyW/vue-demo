@@ -11,8 +11,8 @@
       >
         <h4>Add Form</h4>
         <add-form
-          @add-todo="handleAddTodo"
           ref="addForm"
+          @add-todo="handleAddTodo"
         />
       </el-col>
       <el-col
@@ -45,107 +45,107 @@
 </template>
 
 <script>
-import dayjs from 'dayjs'
-import { get, set, remove } from '@u/storage'
-import AddForm from './components/AddForm'
-import ShowList from './components/ShowList'
+import dayjs from 'dayjs';
+import { get, set, remove } from '@u/storage';
+import AddForm from './components/AddForm';
+import ShowList from './components/ShowList';
 
 export default {
-  name: 'home',
+  name: 'Home',
   components: {
     AddForm,
-    ShowList
+    ShowList,
   },
-  data () {
-    const todoListKey = 'todoList'
-    const doneListKey = 'doneList'
+  data() {
+    const todoListKey = 'todoList';
+    const doneListKey = 'doneList';
     return {
       todoListKey,
       doneListKey,
       todoList: get(todoListKey).data || [],
-      doneList: get(doneListKey).data || []
-    }
+      doneList: get(doneListKey).data || [],
+    };
   },
   methods: {
-    handleAddTodo (payload) {
+    handleAddTodo(payload) {
       const newTodo = {
         ...payload,
-        timestamp: dayjs().valueOf()
-      }
-      this.todoList.push(newTodo)
-      const res = set(this.todoListKey, this.todoList)
+        timestamp: dayjs().valueOf(),
+      };
+      this.todoList.push(newTodo);
+      const res = set(this.todoListKey, this.todoList);
       if (res.success) {
         this.$message({
           message: 'Add successfully.',
-          type: 'success'
-        })
+          type: 'success',
+        });
       } else {
         this.$alert(res.message, 'Failed')
           .then(() => {})
-          .catch(() => {})
+          .catch(() => {});
       }
     },
-    handleClear (payload) {
-      const { type } = payload
+    handleClear(payload) {
+      const { type } = payload;
       switch (type) {
         case 'todo':
-          this.todoList = []
-          remove(this.todoListKey)
-          break
+          this.todoList = [];
+          remove(this.todoListKey);
+          break;
         case 'done':
-          this.doneList = []
-          remove(this.doneListKey)
-          break
+          this.doneList = [];
+          remove(this.doneListKey);
+          break;
         default:
-          break
+          break;
       }
     },
-    handleAddDone (payload) {
-      const newDone = this.todoList.shift()
-      this.doneList.push(newDone)
-      const res1 = set(this.todoListKey, this.todoList)
-      const res2 = set(this.doneListKey, this.doneList)
+    handleAddDone(payload) {
+      const newDone = this.todoList.shift();
+      this.doneList.push(newDone);
+      const res1 = set(this.todoListKey, this.todoList);
+      const res2 = set(this.doneListKey, this.doneList);
       if (!res1.success) {
         this.$alert(res1.message, 'Error')
           .then(() => {})
-          .catch(() => {})
+          .catch(() => {});
       } else if (!res2.success) {
         this.$alert(res2.message, 'Error')
           .then(() => {})
-          .catch(() => {})
+          .catch(() => {});
       } else {
         this.$message({
           message: 'Done successfully.',
-          type: 'success'
-        })
+          type: 'success',
+        });
       }
     },
-    handleRemove (payload) {
-      const { type, index } = payload
-      let res
+    handleRemove(payload) {
+      const { type, index } = payload;
+      let res;
       switch (type) {
         case 'todo':
-          this.todoList.splice(index, 1)
-          res = set(this.todoListKey, this.todoList)
-          break
+          this.todoList.splice(index, 1);
+          res = set(this.todoListKey, this.todoList);
+          break;
         case 'done':
-          this.doneList.splice(index, 1)
-          res = set(this.doneListKey, this.doneList)
-          break
+          this.doneList.splice(index, 1);
+          res = set(this.doneListKey, this.doneList);
+          break;
         default:
-          break
+          break;
       }
       if (!res.success) {
         this.$alert(res.message, 'Error')
           .then(() => {})
-          .catch(() => {})
+          .catch(() => {});
       } else {
         this.$message({
           message: 'Remove successfully.',
-          type: 'success'
-        })
+          type: 'success',
+        });
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>

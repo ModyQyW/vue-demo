@@ -31,33 +31,33 @@
 </template>
 
 <script>
-import ShowListItem from './ShowListItem'
+import ShowListItem from './ShowListItem';
 
 export default {
   name: 'ShowList',
   components: {
-    ShowListItem
+    ShowListItem,
   },
   props: {
     type: {
       type: String,
-      required: true
+      required: true,
     },
     list: {
       type: Array,
-      required: true
-    }
+      required: true,
+    },
   },
   methods: {
-    handleDone (payload) {
-      this.$emit('done', payload)
+    handleDone(payload) {
+      this.$emit('done', payload);
     },
-    handleRemove (payload) {
-      this.$emit('remove', payload)
+    handleRemove(payload) {
+      this.$emit('remove', payload);
     },
-    handleClear () {
-      this.$emit('clear', { type: this.type })
-    }
-  }
-}
+    handleClear() {
+      this.$emit('clear', { type: this.type });
+    },
+  },
+};
 </script>

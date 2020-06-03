@@ -70,40 +70,40 @@ export default {
   props: {
     item: {
       type: Object,
-      required: true
+      required: true,
     },
     index: {
       type: Number,
-      required: true
+      required: true,
     },
     type: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
-  data () {
+  data() {
     return {
-      isExpanded: false
-    }
+      isExpanded: false,
+    };
   },
   computed: {
-    iconToggleName () {
-      return this.isExpanded ? 'el-icon-caret-bottom' : 'el-icon-caret-left'
-    }
+    iconToggleName() {
+      return this.isExpanded ? 'el-icon-caret-bottom' : 'el-icon-caret-left';
+    },
   },
   methods: {
-    handleDone () {
+    handleDone() {
       this.$emit('done', {
         index: this.index,
-        type: this.type
-      })
+        type: this.type,
+      });
     },
-    handleRemove () {
+    handleRemove() {
       this.$emit('remove', {
         index: this.index,
-        type: this.type
-      })
-    }
-  }
-}
+        type: this.type,
+      });
+    },
+  },
+};
 </script>

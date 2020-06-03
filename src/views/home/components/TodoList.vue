@@ -18,25 +18,25 @@
 </template>
 
 <script>
-import ListItem from './ListItem'
+import ListItem from './ListItem';
 
 export default {
   components: {
-    ListItem
+    ListItem,
   },
   props: {
     todo: {
       type: Array,
-      required: true
-    }
+      required: true,
+    },
   },
   methods: {
-    handleDone (payload) {
-      this.$emit('done', payload)
+    handleDone(payload) {
+      this.$emit('done', payload);
     },
-    handleRemove (payload) {
-      this.$emit('remove', payload)
-    }
-  }
-}
+    handleRemove(payload) {
+      this.$emit('remove', payload);
+    },
+  },
+};
 </script>

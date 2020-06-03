@@ -7,19 +7,23 @@
       <el-menu
         :default-active="defaultActiveIndex"
         mode="horizontal"
-        @select="handleSelect"
         class="d-flex align-center justify-center"
+        @select="handleSelect"
       >
-        <el-menu-item index="/">Home</el-menu-item>
-        <el-menu-item index="/about">About</el-menu-item>
+        <el-menu-item index="/">
+          Home
+        </el-menu-item>
+        <el-menu-item index="/about">
+          About
+        </el-menu-item>
       </el-menu>
     </el-header>
     <el-button
       icon="el-icon-view"
       circle
-      @click="handleToggleTheme"
       type="info"
       style="position: fixed; bottom: 12px; left: 12px; width: 40px; height: 40px;"
+      @click="handleToggleTheme"
     />
     <router-view />
   </el-container>
@@ -28,25 +32,25 @@
 <script>
 export default {
   computed: {
-    defaultActiveIndex () {
-      return this.$route.path
+    defaultActiveIndex() {
+      return this.$route.path;
     },
-    theme () {
-      return this.$store.state.theme
-    }
+    theme() {
+      return this.$store.state.theme;
+    },
   },
   methods: {
-    handleSelect (key, keyPath) {
-      this.$router.push({ path: keyPath[0] })
+    handleSelect(key, keyPath) {
+      this.$router.push({ path: keyPath[0] });
     },
-    handleToggleTheme () {
+    handleToggleTheme() {
       if (this.theme === 'light') {
-        this.$message('A fake dark theme. :D')
+        this.$message('A fake dark theme. :D');
       }
-      this.$store.commit('toggleTheme')
-    }
-  }
-}
+      this.$store.commit('toggleTheme');
+    },
+  },
+};
 </script>
 
 <style>

@@ -1,9 +1,9 @@
 <template>
   <el-form
+    ref="addForm"
     :model="addForm"
     :rules="addFormRules"
     label-position="left"
-    ref="addForm"
     label-width="80px"
   >
     <el-form-item
@@ -24,8 +24,8 @@
       required
     >
       <el-input
-        type="textarea"
         v-model="addForm.detail"
+        type="textarea"
         :rows="8"
         resize="none"
         show-word-limit
@@ -56,42 +56,36 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       addForm: {
         title: '',
-        detail: ''
+        detail: '',
       },
       addFormRules: {
         title: [
           { required: true, message: 'Please set todo title', trigger: 'blur' },
-          { max: 20, message: 'Should less than 20', trigger: 'blur' }
+          { max: 20, message: 'Should less than 20', trigger: 'blur' },
         ],
         detail: [
           { required: true, message: 'Please set todo detail', trigger: 'change' },
-          { max: 100, message: 'Should less than 100', trigger: 'blur' }
-        ]
-      }
-    }
+          { max: 100, message: 'Should less than 100', trigger: 'blur' },
+        ],
+      },
+    };
   },
   methods: {
-    handleSubmitForm () {
+    handleSubmitForm() {
       this.$refs.addForm.validate((valid) => {
         if (valid) {
-          this.$emit('add-todo', this.addForm)
-          this.handleResetForm()
+          this.$emit('add-todo', this.addForm);
+          this.handleResetForm();
         }
-      })
+      });
     },
-    handleResetForm () {
-      this.$refs.addForm.resetFields()
-    }
-  }
-}
+    handleResetForm() {
+      this.$refs.addForm.resetFields();
+    },
+  },
+};
 </script>
-
-<style lang="scss">
-.el-date-editor.el-input {
-  width: 100% !important;
-}
-</style>

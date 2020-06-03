@@ -29,25 +29,25 @@
 </template>
 
 <script>
-import ListItem from './ListItem'
+import ListItem from './ListItem';
 
 export default {
   components: {
-    ListItem
+    ListItem,
   },
   props: {
     done: {
       type: Array,
-      required: true
-    }
+      required: true,
+    },
   },
   methods: {
-    handleRemove (payload) {
-      this.$emit('remove', payload)
+    handleRemove(payload) {
+      this.$emit('remove', payload);
     },
-    handleClear () {
-      this.$emit('clear', { type: this.type })
-    }
-  }
-}
+    handleClear() {
+      this.$emit('clear', { type: this.type });
+    },
+  },
+};
 </script>
