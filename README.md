@@ -1,6 +1,6 @@
 # vue2-todo-list-demo
 
-A todo list demo for new Vuer, initialled by vue-cli 4 and built with vue 2, vue-router 3, element-ui 2 and dayjs 1.
+A todo list demo for new Vuer, initialled by vue-cli 4 and built with vue 2, vue-router 3 and vuetify 2.
 
 ## Getting Started
 
@@ -56,9 +56,8 @@ No tests now. Pull requests are welcome.
 - [vue-cli](https://cli.vuejs.org/) - Standard tooling for Vue.js development, using to initial this project
 - [vue](https://vuejs.org) - A progressive JavaScript framework
 - [vue-router](https://router.vuejs.org/) - The official router for Vue.js
-- [element-ui](https://element.eleme.io/) - A Vue.js 2.0 UI Toolkit for Web
-- [dayjs](https://github.com/iamkun/dayjs) - 2KB immutable date library alternative to Moment.js with the same modern API
-- [eslint](https://eslint.org) - An open source project provided a pluggable linting utility for JavaScript, using [standard](https://standardjs.com/) in the project
+- [vuetify](https://vuetifyjs.com/) - A Vue UI Library with beautifully handcrafted Material Components
+- [eslint](https://eslint.org) - An open source project provided a pluggable linting utility for JavaScript
 - [sass](https://github.com/sass/dart-sass) - A pure JavaScript implementation of [Sass](https://sass-lang.com/)
 - [stylelint](https://stylelint.io/) - A mighty, modern linter that helps you avoid errors and enforce conventions in your styles
 

@@ -1,150 +1,196 @@
 <template>
-  <el-main style="max-height: calc(100% - 60px);">
-    <el-row
-      type="flex"
-      :gutter="20"
-      style="max-height: calc(100% - 100px); padding: 0 20px;"
-    >
-      <el-col
-        :span="8"
-        style="max-height: 100%;"
+  <v-container>
+    <v-row>
+      <v-col
+        :cols="12"
+        :md="4"
+        :sm="12"
       >
-        <h4>Add Form</h4>
-        <add-form
-          ref="addForm"
-          @add-todo="handleAddTodo"
-        />
-      </el-col>
-      <el-col
-        :span="8"
-        style="max-height: 100%;"
+        <p class="text-body-1">
+          Add Todo
+        </p>
+        <v-form
+          ref="form"
+          lazy-validation
+        >
+          <v-text-field
+            v-model="title"
+            :counter="20"
+            :rules="titleRules"
+            label="Title"
+            required
+          />
+          <v-row
+            justify="space-around"
+            class="mt-2"
+          >
+            <v-btn
+              color="primary"
+              @click="handleConfirm"
+            >
+              OK
+            </v-btn>
+            <v-btn @click="handleReset">
+              Reset
+            </v-btn>
+          </v-row>
+        </v-form>
+      </v-col>
+      <v-col
+        :cols="12"
+        :md="4"
+        :sm="12"
       >
-        <h4>Todo List</h4>
-        <show-list
-          type="todo"
-          :list="todoList"
-          @done="handleAddDone"
-          @remove="handleRemove"
-          @clear="handleClear"
-        />
-      </el-col>
-      <el-col
-        :span="8"
-        style="max-height: 100%;"
+        <p class="text-body-1">
+          Todo List
+        </p>
+        <v-card
+          max-height="600px"
+          class="overflow-y-auto"
+        >
+          <v-list dense>
+            <v-subheader v-if="todoList.length === 0">
+              Empty
+            </v-subheader>
+            <template v-for="todo of todoList">
+              <v-list-item :key="todo.timestamp">
+                <v-list-item-content>
+                  <!-- tooltip is better -->
+                  <v-list-item-title
+                    :title="todo.title"
+                    v-text="todo.title"
+                  />
+                  <v-list-item-subtitle>
+                    {{ todo.timestamp | filterTimestamp }}
+                  </v-list-item-subtitle>
+                </v-list-item-content>
+                <v-list-item-action class="flex-row">
+                  <v-btn
+                    icon
+                    @click="handleRemove('todo', todo.timestamp)"
+                  >
+                    <v-icon>mdi-delete</v-icon>
+                  </v-btn>
+                  <v-btn icon>
+                    <v-icon @click="handleComplete(todo.timestamp)">
+                      mdi-check
+                    </v-icon>
+                  </v-btn>
+                </v-list-item-action>
+              </v-list-item>
+            </template>
+          </v-list>
+        </v-card>
+      </v-col>
+      <v-col
+        :cols="12"
+        :md="4"
+        :sm="12"
       >
-        <h4>Done List</h4>
-        <show-list
-          type="done"
-          :list="doneList"
-          @remove="handleRemove"
-          @clear="handleClear"
-        />
-      </el-col>
-    </el-row>
-  </el-main>
+        <p class="text-body-1">
+          Done List
+        </p>
+        <v-card
+          max-height="600px"
+          class="overflow-y-auto"
+        >
+          <v-list dense>
+            <v-subheader v-if="doneList.length === 0">
+              Empty
+            </v-subheader>
+            <template v-for="done of doneList">
+              <v-list-item :key="done.timestamp">
+                <v-list-item-content>
+                  <!-- tooltip is better -->
+                  <v-list-item-title
+                    :title="done.title"
+                    v-text="done.title"
+                  />
+                  <v-list-item-subtitle>
+                    {{ done.timestamp | filterTimestamp }}
+                  </v-list-item-subtitle>
+                </v-list-item-content>
+                <v-list-item-action>
+                  <v-btn
+                    icon
+                    @click="handleRemove('done', done.timestamp)"
+                  >
+                    <v-icon>mdi-delete</v-icon>
+                  </v-btn>
+                </v-list-item-action>
+              </v-list-item>
+            </template>
+          </v-list>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
-import dayjs from 'dayjs';
-import { get, set, remove } from '@u/storage';
-import AddForm from './components/AddForm';
-import ShowList from './components/ShowList';
+import {
+  getTodoList, setTodoList, getDoneList, setDoneList,
+} from '@u/storage';
 
 export default {
-  name: 'Home',
-  components: {
-    AddForm,
-    ShowList,
+  filters: {
+    filterTimestamp(timestamp) {
+      return new Date(timestamp).toLocaleString();
+    },
   },
-  data() {
-    const todoListKey = 'todoList';
-    const doneListKey = 'doneList';
-    return {
-      todoListKey,
-      doneListKey,
-      todoList: get(todoListKey).data || [],
-      doneList: get(doneListKey).data || [],
-    };
-  },
+  data: () => ({
+    title: '',
+    titleRules: [
+      (v) => !!v || 'Title is required',
+      (v) => (v && v.length <= 20) || 'Title must be less than 20 characters',
+    ],
+    todoList: getTodoList(),
+    doneList: getDoneList(),
+  }),
   methods: {
-    handleAddTodo(payload) {
-      const newTodo = {
-        ...payload,
-        timestamp: dayjs().valueOf(),
-      };
-      this.todoList.push(newTodo);
-      const res = set(this.todoListKey, this.todoList);
-      if (res.success) {
-        this.$message({
-          message: 'Add successfully.',
-          type: 'success',
+    handleReset() {
+      this.$refs.form.reset();
+    },
+    handleConfirm() {
+      if (this.$refs.form.validate()) {
+        this.todoList.unshift({
+          title: this.title,
+          timestamp: +new Date(),
         });
-      } else {
-        this.$alert(res.message, 'Failed')
-          .then(() => {})
-          .catch(() => {});
+        setTodoList(this.todoList);
+        this.handleReset();
       }
     },
-    handleClear(payload) {
-      const { type } = payload;
-      switch (type) {
-        case 'todo':
-          this.todoList = [];
-          remove(this.todoListKey);
-          break;
-        case 'done':
-          this.doneList = [];
-          remove(this.doneListKey);
-          break;
-        default:
-          break;
+    handleRemove(type, timestamp) {
+      if (type === 'todo') {
+        for (let i = 0, len = this.todoList.length; i < len; i += 1) {
+          if (this.todoList[i].timestamp === timestamp) {
+            this.todoList.splice(i, 1);
+            setTodoList(this.todoList);
+            break;
+          }
+        }
+      } else {
+        for (let i = 0, len = this.doneList.length; i < len; i += 1) {
+          if (this.doneList[i].timestamp === timestamp) {
+            this.doneList.splice(i, 1);
+            setDoneList(this.doneList);
+            break;
+          }
+        }
       }
     },
-    handleAddDone(payload) {
-      const newDone = this.todoList.shift();
-      this.doneList.push(newDone);
-      const res1 = set(this.todoListKey, this.todoList);
-      const res2 = set(this.doneListKey, this.doneList);
-      if (!res1.success) {
-        this.$alert(res1.message, 'Error')
-          .then(() => {})
-          .catch(() => {});
-      } else if (!res2.success) {
-        this.$alert(res2.message, 'Error')
-          .then(() => {})
-          .catch(() => {});
-      } else {
-        this.$message({
-          message: 'Done successfully.',
-          type: 'success',
-        });
-      }
-    },
-    handleRemove(payload) {
-      const { type, index } = payload;
-      let res;
-      switch (type) {
-        case 'todo':
-          this.todoList.splice(index, 1);
-          res = set(this.todoListKey, this.todoList);
+    handleComplete(timestamp) {
+      let item = {};
+      for (let i = 0, len = this.todoList.length; i < len; i += 1) {
+        if (this.todoList[i].timestamp === timestamp) {
+          [item] = this.todoList.splice(i, 1);
+          setTodoList(this.todoList);
           break;
-        case 'done':
-          this.doneList.splice(index, 1);
-          res = set(this.doneListKey, this.doneList);
-          break;
-        default:
-          break;
+        }
       }
-      if (!res.success) {
-        this.$alert(res.message, 'Error')
-          .then(() => {})
-          .catch(() => {});
-      } else {
-        this.$message({
-          message: 'Remove successfully.',
-          type: 'success',
-        });
-      }
+      this.doneList.unshift(item);
+      setDoneList(this.doneList);
     },
   },
 };

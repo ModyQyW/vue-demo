@@ -1,6 +1,11 @@
 <template>
-  <el-main>
-    <h4>A demo of todo list</h4>
-    <p>built with vue2, vue-router 3, element-ui 2 and dayjs 1</p>
-  </el-main>
+  <v-container>
+    <v-responsive class="overflow-visible">
+      <p>built with vue 2, vue-router 3, vuex 3 and vuetify 2</p>
+    </v-responsive>
+  </v-container>
 </template>
+
+<script>
+export default {};
+</script>

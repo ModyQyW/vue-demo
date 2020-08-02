@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@a/*": ["./src/assets/*"],
+      "@c/*": ["./src/components/*"],
+      "@m/*": ["./src/mixins/*"],
+      "@p/*": ["./src/plugins/*"],
+      "@u/*": ["./src/utils/*"],
+      "@v/*": ["./src/views/*"]
+    },
+    "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
+    "allowJs": true,
+    "noEmit": true
+  },
+  "include": ["**/*"],
+  "exclude": ["node_modules"]
+}

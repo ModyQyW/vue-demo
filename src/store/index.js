@@ -1,25 +1,21 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { get, set } from '@u/storage';
-
-const themeKey = 'theme';
+import { getTheme, setTheme } from '@u/storage';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
+  strict: process.env.NODE_ENV !== 'production',
   state: {
-    theme: get(themeKey) || 'light',
+    theme: getTheme(),
   },
+  getters: {},
   mutations: {
-    toggleTheme(state) {
-      state.theme = state.theme === 'light'
-        ? 'dark'
-        : 'light';
-      set(themeKey, state.theme);
+    setTheme(state, theme) {
+      state.theme = theme === 'light' || theme === 'dark' ? theme : 'light';
+      setTheme(state.theme);
     },
   },
-  actions: {
-  },
-  modules: {
-  },
+  actions: {},
+  modules: {},
 });
