@@ -15,6 +15,7 @@
     "build": "vue-cli-service build --report",
     "lint": "npm run lint:script && npm run lint:style && npm run lint:ls",
     "commit": "git-cz && git push",
+    "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales './src/i18n/locales/**/*.json'",
     "lint:script": "vue-cli-service lint",
     "lint:style": "stylelint ./src/**/*.scss --fix",
     "lint:ls": "ls-lint"
@@ -25,6 +26,7 @@
     "core-js": "^3.6.5",
     "roboto-fontface": "^0.10.0",
     "vue": "^2.6.12",
+    "vue-i18n": "^8.17.3",
     "vue-router": "^3.4.5",
     "vuetify": "^2.3.12",
     "vuex": "^3.5.1"
@@ -52,6 +54,7 @@
     "sass-loader": "^10.0.2",
     "stylelint": "^13.7.2",
     "stylelint-webpack-plugin": "^2.1.0",
+    "vue-cli-plugin-i18n": "~1.0.1",
     "vue-cli-plugin-vuetify": "^2.0.7",
     "vue-template-compiler": "^2.6.12",
     "vuetify-loader": "^1.6.0"
