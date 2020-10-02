@@ -1,8 +1,8 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Layout from '@/layout';
-import Home from '@v/home';
-import About from '@v/about';
+import Layout from '@/layout/index.vue';
+import Home from '@/views/home/index.vue';
+import About from '@/views/about/index.vue';
 
 Vue.use(VueRouter);
 
@@ -36,7 +36,7 @@ const routes = [
       {
         path: '',
         name: '404',
-        component: () => import('@v/exception/404.vue'),
+        component: () => import('@/views/exception/404.vue'),
       },
     ],
   },
@@ -46,7 +46,7 @@ const routes = [
     children: [
       {
         path: '',
-        component: () => import('@v/exception/404.vue'),
+        component: () => import('@/views/exception/404.vue'),
       },
     ],
   },

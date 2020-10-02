@@ -6,11 +6,9 @@
       "@a/*": ["./src/assets/*"],
       "@c/*": ["./src/components/*"],
       "@m/*": ["./src/mixins/*"],
-      "@p/*": ["./src/plugins/*"],
-      "@u/*": ["./src/utils/*"],
-      "@v/*": ["./src/views/*"]
+      "@u/*": ["./src/utils/*"]
     },
-    "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
+    "lib": ["esnext", "scripthost"],
     "allowJs": true,
     "noEmit": true
   },
