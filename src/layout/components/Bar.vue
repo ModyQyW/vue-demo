@@ -37,16 +37,36 @@
           v-bind="attrs"
           v-on="on"
         >
+          <v-icon>mdi-translate</v-icon>
+        </v-btn>
+      </template>
+      <v-list>
+        <v-list-item
+          v-for="item in languageItems"
+          :key="item.value"
+          @click="handleSetLanguage(item.value)"
+        >
+          <v-list-item-title>{{ item.label }}</v-list-item-title>
+        </v-list-item>
+      </v-list>
+    </v-menu>
+    <v-menu bottom>
+      <template #activator="{ on, attrs }">
+        <v-btn
+          icon
+          v-bind="attrs"
+          v-on="on"
+        >
           <v-icon>mdi-palette</v-icon>
         </v-btn>
       </template>
       <v-list>
         <v-list-item
-          v-for="item in items"
-          :key="item"
-          @click="handleSetTheme(item)"
+          v-for="item in themeItems"
+          :key="item.value"
+          @click="handleSetTheme(item.value)"
         >
-          <v-list-item-title>{{ item }}</v-list-item-title>
+          <v-list-item-title>{{ $t(item.label) }}</v-list-item-title>
         </v-list-item>
       </v-list>
     </v-menu>
@@ -71,11 +91,32 @@ export default {
     },
   },
   data: () => ({
-    items: ['light', 'dark'],
+    languageItems: [{
+      label: 'English',
+      value: 'en',
+    }, {
+      label: '简体中文',
+      value: 'zh-Hans',
+    }, {
+      label: '繁體中文',
+      value: 'zh-Hant',
+    }],
+    themeItems: [
+      {
+        label: 'theme.light',
+        value: 'light',
+      }, {
+        label: 'theme.dark',
+        value: 'dark',
+      }],
   }),
   methods: {
     handleToggleDrawer() {
       this.$emit('update:drawer', !this.drawer);
+    },
+    handleSetLanguage(item) {
+      this.$store.commit('setLanguage', item);
+      this.$i18n.locale = item;
     },
     handleSetTheme(item) {
       this.$store.commit('setTheme', item);

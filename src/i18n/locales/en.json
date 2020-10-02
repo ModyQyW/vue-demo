@@ -1,3 +1,7 @@
 {
-  "hello": "hello i18n !!"
+  "hello": "hello i18n !!",
+  "theme": {
+    "light": "light",
+    "dark": "dark"
+  }
 }

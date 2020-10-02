@@ -51,3 +51,17 @@ export const setTheme = (theme) => {
 export const clearTheme = () => {
   localStorage.removeItem(keyTheme);
 };
+
+const keyLanguage = 'language';
+
+/**
+ * @return {'en'|'zh-Hans'|'zh-Hant'}
+ */
+export const getLanguage = () => localStorage.getItem(keyLanguage) || 'en';
+
+/**
+ * @param {'en'|'zh-Hans'|'zh-Hant'} language
+ */
+export const setLanguage = (language) => {
+  localStorage.setItem(keyLanguage, language);
+};
