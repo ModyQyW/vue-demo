@@ -7,7 +7,7 @@
         :sm="12"
       >
         <p class="text-body-1">
-          Add Todo
+          {{ $t('app.text.add-todo') }}
         </p>
         <v-form
           ref="form"
@@ -17,7 +17,7 @@
             v-model="title"
             :counter="20"
             :rules="titleRules"
-            label="Title"
+            :label="$t('app.placeholder.title')"
             required
           />
           <v-row
@@ -28,10 +28,10 @@
               color="primary"
               @click="handleConfirm"
             >
-              OK
+              {{ $t('app.button.ok') }}
             </v-btn>
             <v-btn @click="handleReset">
-              Reset
+              {{ $t('app.button.reset') }}
             </v-btn>
           </v-row>
         </v-form>
@@ -42,7 +42,7 @@
         :sm="12"
       >
         <p class="text-body-1">
-          Todo List
+          {{ $t('app.text.todo-list') }}
         </p>
         <v-card
           max-height="600px"
@@ -50,7 +50,7 @@
         >
           <v-list dense>
             <v-subheader v-if="todoList.length === 0">
-              Empty
+              {{ $t('app.text.empty') }}
             </v-subheader>
             <template v-for="todo of todoList">
               <v-list-item :key="todo.timestamp">
@@ -88,7 +88,7 @@
         :sm="12"
       >
         <p class="text-body-1">
-          Done List
+          {{ $t('app.text.done-list') }}
         </p>
         <v-card
           max-height="600px"
@@ -96,7 +96,7 @@
         >
           <v-list dense>
             <v-subheader v-if="doneList.length === 0">
-              Empty
+              {{ $t('app.text.empty') }}
             </v-subheader>
             <template v-for="done of doneList">
               <v-list-item :key="done.timestamp">

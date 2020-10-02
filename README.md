@@ -1,6 +1,8 @@
-# vue2-todo-list-demo
+# vue-todo-list-demo
 
-A todo list demo for new Vuer, initialled by vue-cli 4 and built with vue 2, vue-router 3 and vuetify 2.
+English | [简体中文](./README.zh-Hans.md)
+
+A todo list demo for new Vuer, initialled by vue-cli 4 and built with vue 2, vue-router 3, vuex 3 and vuetify 2.
 
 ## Getting Started
 
@@ -8,17 +10,11 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-- Using nvm, node lts, npm lts and yarn is recommended
-  - Follow the links below and install nvm first
-    - [nvm for Mac/Linux](https://github.com/nvm-sh/nvm)
-    - [nvm-windows](https://github.com/coreybutler/nvm-windows)
-    - Using [Homebrew](https://brew.sh/) to install nvm on Mac is **NOT** recommended
-  - Then install node lts in terminal / command line
-
-    ```sh
-    nvm install --lts
-    ```
-
+- Using nvm, node lts, npm lts and yarn is recommended.
+  - Install nvm first
+    - [nvm for Mac/Linux](https://github.com/nvm-sh/nvm#readme)
+    - [nvm-windows](https://github.com/coreybutler/nvm-windows#readme) - [known issue #300](https://github.com/coreybutler/nvm-windows/issues/300)
+  - Install node lts in terminal / command line
   - Globally update npm to lts and install yarn
 
     ```sh
@@ -26,25 +22,35 @@ These instructions will get you a copy of the project up and running on your loc
     npm i -g yarn
     ```
 
-  - If you are Chinese, maybe you should set mirrors
-- Git is also required
+  - Mirrors are set by default for Chinese users
+- Git is also required.
   - [git for Windows/Linux](https://git-scm.com/downloads)
-  - Using [Homebrew](https://brew.sh/) to install git on Mac is recommended
+  - It is recommended to use [Homebrew](https://brew.sh/) to install git on Mac
 
 ### Installing
 
 ```sh
 # clone the project
-git clone git@github.com:ModyQyW/vue2-todo-list-demo.git
+git clone git@github.com:ModyQyW/vue-todo-list-demo.git
 
 # enter the project directory
-cd vue2-todo-list-demo
+cd vue-todo-list-demo
 
 # install dependency
 yarn
 
-# start developing
+# build for development
 yarn dev
+
+# build for production
+yarn build
+
+# lint scripts, styles and ls
+yarn lint
+
+# git commit and git push
+# git add should be handled by yourself
+yarn commit
 ```
 
 ## Running the tests
@@ -53,27 +59,35 @@ No tests now. Pull requests are welcome.
 
 ## Built With
 
-- [vue-cli](https://cli.vuejs.org/) - Standard tooling for Vue.js development, using to initial this project
-- [vue](https://vuejs.org) - A progressive JavaScript framework
-- [vue-router](https://router.vuejs.org/) - The official router for Vue.js
-- [vuetify](https://vuetifyjs.com/) - A Vue UI Library with beautifully handcrafted Material Components
-- [eslint](https://eslint.org) - An open source project provided a pluggable linting utility for JavaScript
-- [sass](https://github.com/sass/dart-sass) - A pure JavaScript implementation of [Sass](https://sass-lang.com/)
-- [stylelint](https://stylelint.io/) - A mighty, modern linter that helps you avoid errors and enforce conventions in your styles
-
-## Online Demo
-
-[vue2-todo-list-demo](http://modyqyw.top/vue2-todo-list-demo/dist/#/)
+- [vue](https://vuejs.org)
+- [vue-cli](https://cli.vuejs.org/)
+- [vue-router](https://router.vuejs.org/)
+- [vuex](https://vuex.vuejs.org/)
+- [vue-i18n](https://kazupon.github.io/vue-i18n/)
+- [vuetify](https://vuetifyjs.com/en/)
+- [sass](https://sass-lang.com/) - using [dart-sass](https://sass-lang.com/dart-sass) here
+- [commitlint](https://commitlint.js.org/)
+- [commitizen](http://commitizen.github.io/cz-cli/)
+- [prettier](https://prettier.io/)
+- [eslint](https://eslint.org/)
+- [stylelint](https://stylelint.io/)
+- [ls-lint](https://ls-lint.org/)
+- [husky](https://github.com/typicode/husky#readme)
+- [lint-staged](https://github.com/okonet/lint-staged#readme)
 
 ## Browsers Support
 
-Please read [package.json](./package.json) for details. You can get actual supported browsers on [browserl.ist](https://browserl.ist).
+Please read [.browserslistrc](./.browserslistrc) for details.
+
+## Contributing
+
+Please read [CONTRIBUTING.md](./CONTRIBUTING.md) for details on code of conduct, and the process for submitting pull requests.
 
 ## Authors
 
 - **Rui Wu** - *Initial work* - [ModyQyW](https://github.com/ModyQyW)
 
-See also the list of [contributors](https://github.com/ModyQyW/vue2-todo-list-demo/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/ModyQyW/vue-todo-list-demo/contributors) who participated in this project.
 
 ## License
 

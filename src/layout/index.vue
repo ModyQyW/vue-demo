@@ -8,7 +8,7 @@
       <v-list-item>
         <v-list-item-content>
           <v-list-item-title class="title">
-            vue2-todo-list-demo
+            vue-todo-list-demo
           </v-list-item-title>
           <v-list-item-subtitle>
             author: <v-btn
@@ -40,7 +40,7 @@
               <v-icon>{{ item.icon }}</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-title>{{ item.title }}</v-list-item-title>
+              <v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-list-item-group>
@@ -63,11 +63,11 @@ export default {
   data: () => ({
     drawer: null,
     items: [{
-      title: 'Home',
+      title: 'app.drawer.home',
       icon: 'mdi-view-dashboard',
       to: '/',
     }, {
-      title: 'About',
+      title: 'app.drawer.about',
       icon: 'mdi-help-box',
       to: '/about',
     }],

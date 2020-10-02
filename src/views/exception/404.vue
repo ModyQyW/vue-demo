@@ -2,7 +2,7 @@
   <v-container>
     <v-responsive class="overflow-visible">
       <v-row class="justify-center text-h6 primary--text mt-12">
-        page not found
+        {{ $t('app.exception.404') }}
       </v-row>
       <v-row>
         <v-btn
@@ -10,7 +10,7 @@
           class="mx-auto"
           @click="handleBack"
         >
-          Back
+          {{ $t('app.button.back') }}
         </v-btn>
       </v-row>
     </v-responsive>

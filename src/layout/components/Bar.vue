@@ -22,7 +22,7 @@
         width="36"
       />
       <div class="text-h6 d-md-block d-none">
-        vue2-todo-list-demo
+        vue-todo-list-demo
       </div>
     </div>
     <v-app-bar-nav-icon
@@ -71,7 +71,7 @@
       </v-list>
     </v-menu>
     <v-btn
-      href="https://github.com/ModyQyW/vue2-todo-list-demo/"
+      href="https://github.com/ModyQyW/vue-todo-list-demo/"
       target="_blank"
       text
     >
@@ -103,10 +103,10 @@ export default {
     }],
     themeItems: [
       {
-        label: 'theme.light',
+        label: 'app.theme.light',
         value: 'light',
       }, {
-        label: 'theme.dark',
+        label: 'app.theme.dark',
         value: 'dark',
       }],
   }),

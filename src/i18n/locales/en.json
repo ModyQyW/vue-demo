@@ -1,7 +1,31 @@
 {
-  "hello": "hello i18n !!",
-  "theme": {
-    "light": "light",
-    "dark": "dark"
+  "app": {
+    "theme": {
+      "light": "Light",
+      "dark": "Dark"
+    },
+    "button": {
+      "back": "Back",
+      "ok": "OK",
+      "cancel": "Cancel",
+      "reset": "Reset"
+    },
+    "exception": {
+      "404": "Page Not Found"
+    },
+    "drawer": {
+      "home": "Home",
+      "about": "About"
+    },
+    "text": {
+      "about": "Built with vue 2, vue-router 3, vuex 3 and vuetify 2.",
+      "add-todo": "Add Todo",
+      "todo-list": "Todo List",
+      "done-list": "Done List",
+      "empty": "Empty"
+    },
+    "placeholder": {
+      "title": "Title"
+    }
   }
 }
