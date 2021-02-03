@@ -13,13 +13,15 @@
             :label="$t('app.placeholder.title')"
             required
           />
-          <v-row justify="space-around" class="mt-2">
-            <v-btn color="primary" @click="handleConfirm">
-              {{ $t('app.button.ok') }}
-            </v-btn>
-            <v-btn @click="handleReset">
-              {{ $t('app.button.reset') }}
-            </v-btn>
+          <v-row>
+            <v-col>
+              <v-btn class="mr-2" color="primary" @click="handleConfirm">
+                {{ $t('app.button.ok') }}
+              </v-btn>
+              <v-btn @click="handleReset">
+                {{ $t('app.button.reset') }}
+              </v-btn>
+            </v-col>
           </v-row>
         </v-form>
       </v-col>
@@ -35,20 +37,17 @@
             <template v-for="todo of todoList">
               <v-list-item :key="todo.timestamp">
                 <v-list-item-content>
-                  <!-- tooltip is better -->
                   <v-list-item-title :title="todo.title" v-text="todo.title" />
                   <v-list-item-subtitle>
-                    {{ todo.timestamp | filterTimestamp }}
+                    {{ handleFormatTimestamp(todo.timestamp) }}
                   </v-list-item-subtitle>
                 </v-list-item-content>
                 <v-list-item-action class="flex-row">
-                  <v-btn icon @click="handleRemove('todo', todo.timestamp)">
+                  <v-btn icon small @click="handleRemove(todo)">
                     <v-icon>mdi-delete</v-icon>
                   </v-btn>
-                  <v-btn icon>
-                    <v-icon @click="handleComplete(todo.timestamp)">
-                      mdi-check
-                    </v-icon>
+                  <v-btn icon small @click="handleChangeStatus(todo, 2)">
+                    <v-icon>mdi-check</v-icon>
                   </v-btn>
                 </v-list-item-action>
               </v-list-item>
@@ -71,12 +70,15 @@
                   <!-- tooltip is better -->
                   <v-list-item-title :title="done.title" v-text="done.title" />
                   <v-list-item-subtitle>
-                    {{ done.timestamp | filterTimestamp }}
+                    {{ handleFormatTimestamp(done.timestamp) }}
                   </v-list-item-subtitle>
                 </v-list-item-content>
-                <v-list-item-action>
-                  <v-btn icon @click="handleRemove('done', done.timestamp)">
+                <v-list-item-action class="flex-row">
+                  <v-btn icon small @click="handleRemove(done)">
                     <v-icon>mdi-delete</v-icon>
+                  </v-btn>
+                  <v-btn icon small @click="handleChangeStatus(todo, 1)">
+                    <v-icon>mdi-close</v-icon>
                   </v-btn>
                 </v-list-item-action>
               </v-list-item>
@@ -89,67 +91,60 @@
 </template>
 
 <script>
-import { getTodoList, setTodoList, getDoneList, setDoneList } from '@u/storage';
+import { getList, setList } from '@u/storage';
 
 export default {
-  filters: {
-    filterTimestamp(timestamp) {
-      return new Date(timestamp).toLocaleString();
-    },
-  },
   data: () => ({
     title: '',
     titleRules: [
       (v) => !!v || 'Title is required',
       (v) => (v && v.length <= 20) || 'Title must be less than 20 characters',
     ],
-    todoList: getTodoList(),
-    doneList: getDoneList(),
+    list: getList(),
   }),
+  computed: {
+    todoList() {
+      return this.list.filter((listItem) => listItem.status === 1);
+    },
+    doneList() {
+      return this.list.filter((listItem) => listItem.status === 2);
+    },
+  },
   methods: {
+    handleFormatTimestamp(timestamp) {
+      return new Date(timestamp).toLocaleString();
+    },
     handleReset() {
       this.$refs.form.reset();
     },
     handleConfirm() {
       if (this.$refs.form.validate()) {
-        this.todoList.unshift({
+        this.list.unshift({
           title: this.title,
+          status: 1,
           timestamp: Date.now(),
         });
-        setTodoList(this.todoList);
+        setList(this.list);
         this.handleReset();
       }
     },
-    handleRemove(type, timestamp) {
-      if (type === 'todo') {
-        for (let i = 0, len = this.todoList.length; i < len; i += 1) {
-          if (this.todoList[i].timestamp === timestamp) {
-            this.todoList.splice(i, 1);
-            setTodoList(this.todoList);
-            break;
-          }
-        }
-      } else {
-        for (let i = 0, len = this.doneList.length; i < len; i += 1) {
-          if (this.doneList[i].timestamp === timestamp) {
-            this.doneList.splice(i, 1);
-            setDoneList(this.doneList);
-            break;
-          }
-        }
-      }
-    },
-    handleComplete(timestamp) {
-      let item = {};
-      for (let i = 0, len = this.todoList.length; i < len; i += 1) {
-        if (this.todoList[i].timestamp === timestamp) {
-          [item] = this.todoList.splice(i, 1);
-          setTodoList(this.todoList);
+    handleRemove(listItem) {
+      for (let i = 0, len = this.list.length; i < len; i += 1) {
+        if (this.list[i].timestamp === listItem.timestamp) {
+          this.list.splice(i, 1);
+          setList(this.list);
           break;
         }
       }
-      this.doneList.unshift(item);
-      setDoneList(this.doneList);
+    },
+    handleChangeStatus(listItem, status) {
+      for (let i = 0, len = this.list.length; i < len; i += 1) {
+        if (this.list[i].timestamp === listItem.timestamp) {
+          this.list[i].status = status;
+          setList(this.list);
+          break;
+        }
+      }
     },
   },
 };
