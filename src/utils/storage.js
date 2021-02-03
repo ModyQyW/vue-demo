@@ -5,7 +5,7 @@ export const clear = () => {
 const listKey = 'list';
 
 /** @return {{ timestamp: number; status: 1 | 2; title: string; }[]} */
-export const getList = () => JSON.parse(localStorage.getItem(listKey));
+export const getList = () => JSON.parse(localStorage.getItem(listKey)) || [];
 
 /** @param {{ timestamp: number; status: 1 | 2; title: string; }[]} list */
 export const setList = (list) => {
