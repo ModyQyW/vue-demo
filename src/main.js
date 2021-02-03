@@ -1,5 +1,4 @@
 import Vue from 'vue';
-import '@/directives';
 import '@/plugins';
 import i18n from './i18n';
 import router from './router';
