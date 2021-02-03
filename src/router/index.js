@@ -30,17 +30,6 @@ const routes = [
     ],
   },
   {
-    path: '/404',
-    component: Layout,
-    children: [
-      {
-        path: '',
-        name: '404',
-        component: () => import('@/views/exception/404.vue'),
-      },
-    ],
-  },
-  {
     path: '*',
     component: Layout,
     children: [
