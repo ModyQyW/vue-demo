@@ -1,25 +1,25 @@
 <template>
   <v-app-bar app color="primary" dark>
-    <div class="d-flex align-center">
-      <v-img
-        alt="Vue Logo"
-        class="shrink mr-2"
-        contain
-        src="https://vuejs.org/images/logo.png"
-        transition="scale-transition"
-        width="36"
-      />
-      <v-img
-        alt="Vuetify Logo"
-        class="shrink mr-2"
-        contain
-        src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-        transition="scale-transition"
-        width="36"
-      />
-      <div class="text-h6 d-md-block d-none">vue-demo</div>
-    </div>
-    <v-app-bar-nav-icon class="d-lg-none" @click.stop="handleToggleDrawer" />
+    <v-app-bar-nav-icon @click.stop="handleToggleDrawer" />
+    <v-img
+      alt="Vue Logo"
+      class="shrink mr-2"
+      contain
+      lazy-src="https://vuejs.org/images/logo.png"
+      src="https://vuejs.org/images/logo.png"
+      transition="scale-transition"
+      width="36"
+    />
+    <v-img
+      alt="Vuetify Logo"
+      class="shrink mr-2"
+      contain
+      lazy-src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
+      src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
+      transition="scale-transition"
+      width="36"
+    />
+    <v-toolbar-title>vue-demo</v-toolbar-title>
     <v-spacer />
     <v-menu bottom>
       <template #activator="{ on, attrs }">
@@ -54,12 +54,12 @@
       </v-list>
     </v-menu>
     <v-btn href="https://github.com/ModyQyW/vue-demo/" target="_blank" text>
-      <span class="mr-2">Github</span>
-      <v-icon>mdi-open-in-new</v-icon>
+      Github
+      <v-icon right>mdi-open-in-new</v-icon>
     </v-btn>
     <v-btn href="https://gitee.com/ModyQyW/vue-demo/" target="_blank" text>
-      <span class="mr-2">Gitee</span>
-      <v-icon>mdi-open-in-new</v-icon>
+      Gitee
+      <v-icon right>mdi-open-in-new</v-icon>
     </v-btn>
   </v-app-bar>
 </template>

@@ -7,10 +7,7 @@
           <v-list-item-title class="title"> vue-demo </v-list-item-title>
           <v-list-item-subtitle>
             author:
-            <v-btn href="https://github.com/ModyQyW/" target="_blank" text>
-              <span class="mr-2">ModyQyW</span>
-              <v-icon>mdi-open-in-new</v-icon>
-            </v-btn>
+            <a href="https://github.com/ModyQyW/" target="_blank">ModyQyW</a>
           </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
