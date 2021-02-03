@@ -2,66 +2,32 @@ export const clear = () => {
   localStorage.clear();
 };
 
-const keyTodoList = 'todoList';
+const listKey = 'list';
 
-/**
- * @return {{ title: string; timestamp: number; }[]}
- */
-export const getTodoList = () => JSON.parse(localStorage.getItem(keyTodoList)) || [];
+/** @return {{ timestamp: number; status: 1 | 2; title: string; }[]} */
+export const getList = () => JSON.parse(localStorage.getItem(listKey));
 
-/**
- * @param {{ title: string; timestamp: number; }[]} todoList
- */
-export const setTodoList = (todoList = []) => {
-  localStorage.setItem(keyTodoList, JSON.stringify(todoList));
+/** @param {{ timestamp: number; status: 1 | 2; title: string; }[]} list */
+export const setList = (list) => {
+  localStorage.setItem(listKey, JSON.stringify(list));
 };
 
-const keyDoneList = 'doneList';
+const themeKey = 'theme';
 
-/**
- * @return {{ title: string; timestamp: number; }[]}
- */
-export const getDoneList = () => JSON.parse(localStorage.getItem(keyDoneList)) || [];
+/** @return {'light'|'dark'} */
+export const getTheme = () => localStorage.getItem(themeKey) || 'light';
 
-/**
- * @param {{ title: string; timestamp: number; }[]} doneList
- */
-export const setDoneList = (doneList = []) => {
-  localStorage.setItem(keyDoneList, JSON.stringify(doneList));
-};
-
-export const clearDoneList = () => {
-  localStorage.removeItem(keyDoneList);
-};
-
-const keyTheme = 'theme';
-
-/**
- * @return {'light'|'dark'}
- */
-export const getTheme = () => localStorage.getItem(keyDoneList) || 'light';
-
-/**
- * @param {'light'|'dark'} theme
- */
+/** @param {'light'|'dark'} theme */
 export const setTheme = (theme) => {
-  localStorage.setItem(keyTheme, theme);
+  localStorage.setItem(themeKey, theme);
 };
 
-export const clearTheme = () => {
-  localStorage.removeItem(keyTheme);
-};
+const languageKey = 'language';
 
-const keyLanguage = 'language';
+/** @return {'en'|'zh-Hans'} */
+export const getLanguage = () => localStorage.getItem(languageKey) || 'en';
 
-/**
- * @return {'en'|'zh-Hans'|'zh-Hant'}
- */
-export const getLanguage = () => localStorage.getItem(keyLanguage) || 'en';
-
-/**
- * @param {'en'|'zh-Hans'|'zh-Hant'} language
- */
+/** @param {'en'|'zh-Hans'} language */
 export const setLanguage = (language) => {
-  localStorage.setItem(keyLanguage, language);
+  localStorage.setItem(languageKey, language);
 };
