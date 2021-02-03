@@ -20,16 +20,16 @@ module.exports = {
   configureWebpack: (config) => {
     config.plugins.push(
       new StylelintPlugin({
-        files: ['src/**/*.{vue,scss}'],
+        files: ['src/**/*.{css,less,sass,scss,vue}'],
         fix: true,
       }),
     );
     config.resolve.alias = {
-      '@': path.resolve(__dirname, 'src'),
-      '@a': path.resolve(__dirname, 'src', 'assets'),
-      '@c': path.resolve(__dirname, 'src', 'components'),
-      '@m': path.resolve(__dirname, 'src', 'mixins'),
-      '@u': path.resolve(__dirname, 'src', 'utils'),
+      '@': path.resolve('src'),
+      '@a': path.resolve('src', 'assets'),
+      '@c': path.resolve('src', 'components'),
+      '@h': path.resolve('src', 'hooks'),
+      '@u': path.resolve('src', 'utils'),
     };
     if (process.env.NODE_ENV !== 'development') {
       config.optimization.minimizer[0].options.terserOptions.compress.drop_console = true;
@@ -45,12 +45,12 @@ module.exports = {
             chunks: 'initial',
             name: 'chunk-vendors',
             priority: 10,
-            test: /[\\/]node_modules[\\/]/,
+            test: /[/\\]node_modules[/\\]/,
           },
-          element: {
+          vuetify: {
             name: 'chunk-vuetify',
             priority: 20,
-            test: /[\\/]node_modules[\\/]_?vuetify(.*)/,
+            test: /[/\\]node_modules[/\\]_?vuetify(.*)/,
           },
           components: {
             minChunks: 2,
@@ -63,16 +63,21 @@ module.exports = {
       };
     }
   },
-  publicPath: '/',
+  css: {
+    loaderOptions: {
+      scss: {
+        additionalData: '@import "~@/styles/variables.scss";',
+      },
+    },
+  },
   pluginOptions: {
     i18n: {
-      locale: 'en',
-      fallbackLocale: 'en',
+      locale: process.env.VUE_APP_I18N_LOCALE || 'zh-Hans',
+      fallbackLocale: process.env.VUE_APP_I18N_FALLBACK_LOCALE || 'zh-Hans',
       localeDir: 'i18n/locales',
       enableInSFC: false,
     },
   },
-  transpileDependencies: [
-    'vuetify',
-  ],
+  publicPath: '/',
+  transpileDependencies: ['vuetify'],
 };
