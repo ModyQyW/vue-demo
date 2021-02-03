@@ -1,18 +1,11 @@
 <template>
   <v-container>
     <v-row>
-      <v-col
-        :cols="12"
-        :md="4"
-        :sm="12"
-      >
+      <v-col :cols="12" :md="4" :sm="12">
         <p class="text-body-1">
           {{ $t('app.text.add-todo') }}
         </p>
-        <v-form
-          ref="form"
-          lazy-validation
-        >
+        <v-form ref="form" lazy-validation>
           <v-text-field
             v-model="title"
             :counter="20"
@@ -20,14 +13,8 @@
             :label="$t('app.placeholder.title')"
             required
           />
-          <v-row
-            justify="space-around"
-            class="mt-2"
-          >
-            <v-btn
-              color="primary"
-              @click="handleConfirm"
-            >
+          <v-row justify="space-around" class="mt-2">
+            <v-btn color="primary" @click="handleConfirm">
               {{ $t('app.button.ok') }}
             </v-btn>
             <v-btn @click="handleReset">
@@ -36,18 +23,11 @@
           </v-row>
         </v-form>
       </v-col>
-      <v-col
-        :cols="12"
-        :md="4"
-        :sm="12"
-      >
+      <v-col :cols="12" :md="4" :sm="12">
         <p class="text-body-1">
           {{ $t('app.text.todo-list') }}
         </p>
-        <v-card
-          max-height="600px"
-          class="overflow-y-auto"
-        >
+        <v-card max-height="600px" class="overflow-y-auto">
           <v-list dense>
             <v-subheader v-if="todoList.length === 0">
               {{ $t('app.text.empty') }}
@@ -56,19 +36,13 @@
               <v-list-item :key="todo.timestamp">
                 <v-list-item-content>
                   <!-- tooltip is better -->
-                  <v-list-item-title
-                    :title="todo.title"
-                    v-text="todo.title"
-                  />
+                  <v-list-item-title :title="todo.title" v-text="todo.title" />
                   <v-list-item-subtitle>
                     {{ todo.timestamp | filterTimestamp }}
                   </v-list-item-subtitle>
                 </v-list-item-content>
                 <v-list-item-action class="flex-row">
-                  <v-btn
-                    icon
-                    @click="handleRemove('todo', todo.timestamp)"
-                  >
+                  <v-btn icon @click="handleRemove('todo', todo.timestamp)">
                     <v-icon>mdi-delete</v-icon>
                   </v-btn>
                   <v-btn icon>
@@ -82,18 +56,11 @@
           </v-list>
         </v-card>
       </v-col>
-      <v-col
-        :cols="12"
-        :md="4"
-        :sm="12"
-      >
+      <v-col :cols="12" :md="4" :sm="12">
         <p class="text-body-1">
           {{ $t('app.text.done-list') }}
         </p>
-        <v-card
-          max-height="600px"
-          class="overflow-y-auto"
-        >
+        <v-card max-height="600px" class="overflow-y-auto">
           <v-list dense>
             <v-subheader v-if="doneList.length === 0">
               {{ $t('app.text.empty') }}
@@ -102,19 +69,13 @@
               <v-list-item :key="done.timestamp">
                 <v-list-item-content>
                   <!-- tooltip is better -->
-                  <v-list-item-title
-                    :title="done.title"
-                    v-text="done.title"
-                  />
+                  <v-list-item-title :title="done.title" v-text="done.title" />
                   <v-list-item-subtitle>
                     {{ done.timestamp | filterTimestamp }}
                   </v-list-item-subtitle>
                 </v-list-item-content>
                 <v-list-item-action>
-                  <v-btn
-                    icon
-                    @click="handleRemove('done', done.timestamp)"
-                  >
+                  <v-btn icon @click="handleRemove('done', done.timestamp)">
                     <v-icon>mdi-delete</v-icon>
                   </v-btn>
                 </v-list-item-action>
@@ -128,9 +89,7 @@
 </template>
 
 <script>
-import {
-  getTodoList, setTodoList, getDoneList, setDoneList,
-} from '@u/storage';
+import { getTodoList, setTodoList, getDoneList, setDoneList } from '@u/storage';
 
 export default {
   filters: {
@@ -155,7 +114,7 @@ export default {
       if (this.$refs.form.validate()) {
         this.todoList.unshift({
           title: this.title,
-          timestamp: +new Date(),
+          timestamp: Date.now(),
         });
         setTodoList(this.todoList);
         this.handleReset();

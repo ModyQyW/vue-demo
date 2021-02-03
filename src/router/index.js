@@ -52,10 +52,11 @@ const routes = [
   },
 ];
 
-const createRouter = () => new VueRouter({
-  scrollBehavior: () => ({ y: 0 }),
-  routes,
-});
+const createRouter = () =>
+  new VueRouter({
+    scrollBehavior: () => ({ y: 0 }),
+    routes,
+  });
 
 const router = createRouter();
 

@@ -1,9 +1,5 @@
 <template>
-  <v-app-bar
-    app
-    color="primary"
-    dark
-  >
+  <v-app-bar app color="primary" dark>
     <div class="d-flex align-center">
       <v-img
         alt="Vue Logo"
@@ -21,22 +17,13 @@
         transition="scale-transition"
         width="36"
       />
-      <div class="text-h6 d-md-block d-none">
-        vue-todo-list-demo
-      </div>
+      <div class="text-h6 d-md-block d-none">vue-demo</div>
     </div>
-    <v-app-bar-nav-icon
-      class="d-lg-none"
-      @click.stop="handleToggleDrawer"
-    />
+    <v-app-bar-nav-icon class="d-lg-none" @click.stop="handleToggleDrawer" />
     <v-spacer />
     <v-menu bottom>
       <template #activator="{ on, attrs }">
-        <v-btn
-          icon
-          v-bind="attrs"
-          v-on="on"
-        >
+        <v-btn icon v-bind="attrs" v-on="on">
           <v-icon>mdi-translate</v-icon>
         </v-btn>
       </template>
@@ -52,11 +39,7 @@
     </v-menu>
     <v-menu bottom>
       <template #activator="{ on, attrs }">
-        <v-btn
-          icon
-          v-bind="attrs"
-          v-on="on"
-        >
+        <v-btn icon v-bind="attrs" v-on="on">
           <v-icon>mdi-palette</v-icon>
         </v-btn>
       </template>
@@ -70,12 +53,12 @@
         </v-list-item>
       </v-list>
     </v-menu>
-    <v-btn
-      href="https://github.com/ModyQyW/vue-todo-list-demo/"
-      target="_blank"
-      text
-    >
-      <span class="mr-2">Repo</span>
+    <v-btn href="https://github.com/ModyQyW/vue-demo/" target="_blank" text>
+      <span class="mr-2">Github</span>
+      <v-icon>mdi-open-in-new</v-icon>
+    </v-btn>
+    <v-btn href="https://gitee.com/ModyQyW/vue-demo/" target="_blank" text>
+      <span class="mr-2">Gitee</span>
       <v-icon>mdi-open-in-new</v-icon>
     </v-btn>
   </v-app-bar>
@@ -91,24 +74,26 @@ export default {
     },
   },
   data: () => ({
-    languageItems: [{
-      label: 'English',
-      value: 'en',
-    }, {
-      label: '简体中文',
-      value: 'zh-Hans',
-    }, {
-      label: '繁體中文',
-      value: 'zh-Hant',
-    }],
+    languageItems: [
+      {
+        label: 'English',
+        value: 'en',
+      },
+      {
+        label: '简体中文',
+        value: 'zh-Hans',
+      },
+    ],
     themeItems: [
       {
         label: 'app.theme.light',
         value: 'light',
-      }, {
+      },
+      {
         label: 'app.theme.dark',
         value: 'dark',
-      }],
+      },
+    ],
   }),
   methods: {
     handleToggleDrawer() {

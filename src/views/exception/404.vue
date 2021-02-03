@@ -5,11 +5,7 @@
         {{ $t('app.exception.404') }}
       </v-row>
       <v-row>
-        <v-btn
-          color="primary"
-          class="mx-auto"
-          @click="handleBack"
-        >
+        <v-btn color="primary" class="mx-auto" @click="handleBack">
           {{ $t('app.button.back') }}
         </v-btn>
       </v-row>
