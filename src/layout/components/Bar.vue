@@ -1,24 +1,28 @@
 <template>
   <v-app-bar app color="primary" dark>
     <v-app-bar-nav-icon @click.stop="handleToggleDrawer" />
-    <v-img
-      alt="Vue Logo"
-      class="shrink mr-2"
-      contain
-      lazy-src="https://vuejs.org/images/logo.png"
-      src="https://vuejs.org/images/logo.png"
-      transition="scale-transition"
-      width="36"
-    />
-    <v-img
-      alt="Vuetify Logo"
-      class="shrink mr-2"
-      contain
-      lazy-src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-      src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-      transition="scale-transition"
-      width="36"
-    />
+    <a href="https://vuejs.org" target="_blank">
+      <v-img
+        alt="Vue Logo"
+        class="shrink mr-2"
+        contain
+        lazy-src="https://vuejs.org/images/logo.png"
+        src="https://vuejs.org/images/logo.png"
+        transition="scale-transition"
+        width="36"
+      />
+    </a>
+    <a href="https://vuetifyjs.com" target="_blank">
+      <v-img
+        alt="Vuetify Logo"
+        class="shrink mr-2"
+        contain
+        lazy-src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
+        src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
+        transition="scale-transition"
+        width="36"
+      />
+    </a>
     <v-toolbar-title>vue-demo</v-toolbar-title>
     <v-spacer />
     <v-menu bottom>
