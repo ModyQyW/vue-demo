@@ -5,7 +5,7 @@ import { getTheme, setTheme, getLanguage, setLanguage } from '@u/storage';
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  strict: process.env.NODE_ENV !== 'production',
+  strict: process.env.NODE_ENV === 'development',
   state: {
     language: getLanguage(),
     theme: getTheme(),
