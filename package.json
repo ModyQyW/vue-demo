@@ -76,12 +76,6 @@
   "engines": {
     "node": ">=12 <13"
   },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "yarn lint:ls && lint-staged"
-    }
-  },
   "lint-staged": {
     "*.json": "prettier --write",
     "*.md": "markdownlint --fix",
