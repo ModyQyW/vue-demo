@@ -75,11 +75,5 @@
   },
   "engines": {
     "node": ">=12 <13"
-  },
-  "lint-staged": {
-    "*.json": "prettier --write",
-    "*.md": "markdownlint --fix",
-    "*.{js,jsx,ts,tsx,vue}": "vue-cli-service --fix",
-    "*.{css,less,scss,vue}": "stylelint --fix"
   }
 }
