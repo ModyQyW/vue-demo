@@ -1,6 +1,7 @@
 <template>
   <v-app-bar app color="primary" dark>
     <v-app-bar-nav-icon @click.stop="handleToggleDrawer" />
+    <!-- eslint-disable vuejs-accessibility/anchor-has-content -->
     <a href="https://vuejs.org" target="_blank">
       <v-img
         alt="Vue Logo"
@@ -23,7 +24,8 @@
         width="36"
       />
     </a>
-    <v-toolbar-title>vue-demo</v-toolbar-title>
+    <!-- eslint-enable vuejs-accessibility/anchor-has-content -->
+    <v-toolbar-title>vue2-todo-list-demo</v-toolbar-title>
     <v-spacer />
     <v-menu bottom>
       <template #activator="{ on, attrs }">
@@ -57,11 +59,19 @@
         </v-list-item>
       </v-list>
     </v-menu>
-    <v-btn href="https://github.com/ModyQyW/vue-demo/" target="_blank" text>
+    <v-btn
+      href="https://github.com/ModyQyW/vue2-todo-list-demo/"
+      target="_blank"
+      text
+    >
       Github
       <v-icon right>mdi-open-in-new</v-icon>
     </v-btn>
-    <v-btn href="https://gitee.com/ModyQyW/vue-demo/" target="_blank" text>
+    <v-btn
+      href="https://gitee.com/ModyQyW/vue2-todo-list-demo/"
+      target="_blank"
+      text
+    >
       Gitee
       <v-icon right>mdi-open-in-new</v-icon>
     </v-btn>

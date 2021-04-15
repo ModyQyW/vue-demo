@@ -1,6 +1,6 @@
-# vue-demo
+# vue2-todo-list-demo
 
-A simple demo for new Vuer.
+A simple todo-list demo for new Vuer.
 
 ## Dependencies
 
@@ -22,10 +22,6 @@ A simple demo for new Vuer.
 - [lint-staged](https://github.com/okonet/lint-staged#readme)
 - [@modyqyw/fabric](https://github.com/ModyQyW/fabric#readme)
 - [npm-check-updates](https://github.com/raineorshine/npm-check-updates#readme)
-
-## Contributing
-
-Please read [CONTRIBUTING.md](./CONTRIBUTING.md) for details on code of conduct, and the process for submitting pull requests.
 
 ## License
 

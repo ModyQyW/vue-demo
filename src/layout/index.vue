@@ -4,7 +4,9 @@
     <v-navigation-drawer v-model="drawer" app>
       <v-list-item>
         <v-list-item-content>
-          <v-list-item-title class="title"> vue-demo </v-list-item-title>
+          <v-list-item-title class="title">
+            vue2-todo-list-demo
+          </v-list-item-title>
           <v-list-item-subtitle>
             author:
             <a href="https://github.com/ModyQyW/" target="_blank">ModyQyW</a>
