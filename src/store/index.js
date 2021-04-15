@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { getTheme, setTheme, getLanguage, setLanguage } from '@u/storage';
+import { getTheme, setTheme, getLanguage, setLanguage } from '@/utils';
 
 Vue.use(Vuex);
 

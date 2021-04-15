@@ -91,7 +91,7 @@
 </template>
 
 <script>
-import { getList, setList } from '@u/storage';
+import { getList, setList } from '@/utils';
 
 export default {
   data: () => ({
