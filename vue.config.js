@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 const path = require('path');
 const CompressionPlugin = require('compression-webpack-plugin');
 const StylelintPlugin = require('stylelint-webpack-plugin');
@@ -12,33 +11,28 @@ const arrGZipExtension = [
   'otf',
   'woff',
   'woff2',
-  'svg',
   'png',
 ];
 
 module.exports = {
-  configureWebpack: (config) => {
-    config.plugins.push(
-      new StylelintPlugin({
+  chainWebpack: (config) => {
+    config.plugin('stylelint').use(StylelintPlugin, [
+      {
         files: ['src/**/*.{css,less,sass,scss,vue}'],
         fix: true,
-      }),
-    );
-    config.resolve.alias = {
-      '@': path.resolve('src'),
-      '@a': path.resolve('src', 'assets'),
-      '@c': path.resolve('src', 'components'),
-      '@h': path.resolve('src', 'hooks'),
-      '@u': path.resolve('src', 'utils'),
-    };
-    if (process.env.NODE_ENV !== 'development') {
-      config.optimization.minimizer[0].options.terserOptions.compress.drop_console = true;
-      config.plugins.push(
-        new CompressionPlugin({
-          test: new RegExp(`\\.(${arrGZipExtension.join('|')})$`),
-        }),
-      );
-      config.optimization.splitChunks = {
+      },
+    ]);
+    config.when(process.env.NODE_ENV === 'production', (config_) => {
+      config_
+        .plugin('compression')
+        .use(CompressionPlugin, [
+          { test: new RegExp(`\\.(${arrGZipExtension.join('|')})$`) },
+        ]);
+      config_.optimization.minimizer('terser').tap((args) => {
+        args[0].terserOptions.compress.drop_console = true;
+        return args;
+      });
+      config_.optimization.splitChunks({
         chunks: 'all',
         cacheGroups: {
           vendors: {
@@ -60,8 +54,8 @@ module.exports = {
             test: path.resolve('src', 'components'),
           },
         },
-      };
-    }
+      });
+    });
   },
   css: {
     loaderOptions: {
@@ -72,12 +66,11 @@ module.exports = {
   },
   pluginOptions: {
     i18n: {
-      locale: process.env.VUE_APP_I18N_LOCALE || 'zh-Hans',
-      fallbackLocale: process.env.VUE_APP_I18N_FALLBACK_LOCALE || 'zh-Hans',
+      locale: process.env.VUE_APP_I18N_LOCALE || 'en',
+      fallbackLocale: process.env.VUE_APP_I18N_FALLBACK_LOCALE || 'en',
       localeDir: 'i18n/locales',
       enableInSFC: false,
     },
   },
-  publicPath: '/',
   transpileDependencies: ['vuetify'],
 };

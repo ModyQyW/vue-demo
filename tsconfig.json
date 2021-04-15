@@ -2,15 +2,11 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
-      "@a/*": ["./src/assets/*"],
-      "@c/*": ["./src/components/*"],
-      "@h/*": ["./src/hooks/*"],
-      "@u/*": ["./src/utils/*"]
+      "@/*": ["./src/*"]
     },
     "lib": ["esnext", "scripthost"],
     "allowJs": true,
     "noEmit": true
   },
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "dist", "dist_electron"]
 }
