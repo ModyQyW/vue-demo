@@ -25,11 +25,13 @@
       />
     </a>
     <!-- eslint-enable vuejs-accessibility/anchor-has-content -->
-    <v-toolbar-title>vue2-todo-list-demo</v-toolbar-title>
+    <v-toolbar-title class="d-none d-md-block">
+      vue2-todo-list-demo
+    </v-toolbar-title>
     <v-spacer />
     <v-menu bottom>
       <template #activator="{ on, attrs }">
-        <v-btn icon v-bind="attrs" v-on="on">
+        <v-btn icon v-bind="attrs" small v-on="on">
           <v-icon>mdi-palette</v-icon>
         </v-btn>
       </template>
@@ -39,7 +41,7 @@
           :key="item.value"
           @click="handleSetTheme(item.value)"
         >
-          <v-list-item-title>{{ $t(item.label) }}</v-list-item-title>
+          <v-list-item-title>{{ item.label }}</v-list-item-title>
         </v-list-item>
       </v-list>
     </v-menu>
@@ -47,6 +49,7 @@
       href="https://github.com/ModyQyW/vue2-todo-list-demo/"
       target="_blank"
       text
+      small
     >
       Github
       <v-icon right>mdi-open-in-new</v-icon>
@@ -55,6 +58,7 @@
       href="https://gitee.com/ModyQyW/vue2-todo-list-demo/"
       target="_blank"
       text
+      small
     >
       Gitee
       <v-icon right>mdi-open-in-new</v-icon>
@@ -74,11 +78,11 @@ export default {
   data: () => ({
     themeItems: [
       {
-        label: 'app.theme.light',
+        label: 'LIGHT',
         value: 'light',
       },
       {
-        label: 'app.theme.dark',
+        label: 'DARK',
         value: 'dark',
       },
     ],

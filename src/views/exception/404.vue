@@ -2,11 +2,11 @@
   <v-container>
     <v-responsive class="overflow-visible">
       <v-row class="justify-center text-h6 primary--text mt-12">
-        {{ $t('app.exception.404') }}
+        404 Not Found
       </v-row>
       <v-row>
         <v-btn color="primary" class="mx-auto" @click="handleBack">
-          {{ $t('app.button.back') }}
+          Go Back
         </v-btn>
       </v-row>
     </v-responsive>

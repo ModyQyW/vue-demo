@@ -2,38 +2,30 @@
   <v-container>
     <v-row>
       <v-col :cols="12" :md="4" :sm="12">
-        <p class="text-body-1">
-          {{ $t('app.text.add-todo') }}
-        </p>
+        <p class="text-body-1">Add Todo</p>
         <v-form ref="form" lazy-validation>
           <v-text-field
             v-model="title"
             :counter="20"
             :rules="titleRules"
-            :label="$t('app.placeholder.title')"
+            label="Title"
             required
           />
           <v-row>
             <v-col>
               <v-btn class="mr-2" color="primary" @click="handleConfirm">
-                {{ $t('app.button.ok') }}
+                OK
               </v-btn>
-              <v-btn @click="handleReset">
-                {{ $t('app.button.reset') }}
-              </v-btn>
+              <v-btn @click="handleReset"> Reset </v-btn>
             </v-col>
           </v-row>
         </v-form>
       </v-col>
       <v-col :cols="12" :md="4" :sm="12">
-        <p class="text-body-1">
-          {{ $t('app.text.todo-list') }}
-        </p>
+        <p class="text-body-1">Todo List</p>
         <v-card max-height="600px" class="overflow-y-auto">
           <v-list dense>
-            <v-subheader v-if="todoList.length === 0">
-              {{ $t('app.text.empty') }}
-            </v-subheader>
+            <v-subheader v-if="todoList.length === 0"> Empty </v-subheader>
             <template v-for="todo of todoList">
               <v-list-item :key="todo.timestamp">
                 <v-list-item-content>
@@ -56,14 +48,10 @@
         </v-card>
       </v-col>
       <v-col :cols="12" :md="4" :sm="12">
-        <p class="text-body-1">
-          {{ $t('app.text.done-list') }}
-        </p>
+        <p class="text-body-1">Done List</p>
         <v-card max-height="600px" class="overflow-y-auto">
           <v-list dense>
-            <v-subheader v-if="doneList.length === 0">
-              {{ $t('app.text.empty') }}
-            </v-subheader>
+            <v-subheader v-if="doneList.length === 0"> Empty </v-subheader>
             <template v-for="done of doneList">
               <v-list-item :key="done.timestamp">
                 <v-list-item-content>
