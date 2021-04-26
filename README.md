@@ -4,17 +4,17 @@ A simple todo-list demo for new Vuer.
 
 ## Dependencies
 
-- [vue](https://vuejs.org)
+- [vue2](https://vuejs.org)
 - [vue-cli](https://cli.vuejs.org/)
 - [vue-router](https://router.vuejs.org/)
 - [vuex](https://vuex.vuejs.org/)
-- [vue-i18n](https://kazupon.github.io/vue-i18n/)
-- [vuetify](https://vuetifyjs.com/en/)
+- [vuetify2](https://vuetifyjs.com/)
 - [sass](https://sass-lang.com/) - using [dart-sass](https://sass-lang.com/dart-sass) here
 - [commitizen](http://commitizen.github.io/cz-cli/)
 - [commitlint](https://commitlint.js.org/)
 - [prettier](https://prettier.io/)
 - [markdownlint](https://github.com/igorshubovych/markdownlint-cli#readme)
+- [lint-md](https://github.com/lint-md/lint-md#readme)
 - [eslint](https://eslint.org/)
 - [stylelint](https://stylelint.io/)
 - [ls-lint](https://ls-lint.org/)
