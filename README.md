@@ -1,6 +1,6 @@
 # vue2-todo-list-demo
 
-A simple todo-list demo for new Vuer.
+A simple todo-list demo for Vuer.
 
 ## Dependencies
 
