@@ -8,6 +8,10 @@
     "email": "wurui7@mail3.sysu.edu.cn",
     "url": "https://modyqyw.github.io"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ModyQyW/vue2-todo-list-demo"
+  },
   "license": "MIT",
   "scripts": {
     "dev": "vue-cli-service serve --mode development",
