@@ -21,13 +21,3 @@ export const getTheme = () => localStorage.getItem(themeKey) || 'light';
 export const setTheme = (theme) => {
   localStorage.setItem(themeKey, theme);
 };
-
-const languageKey = 'language';
-
-/** @return {'en'|'zh-Hans'} */
-export const getLanguage = () => localStorage.getItem(languageKey) || 'en';
-
-/** @param {'en'|'zh-Hans'} language */
-export const setLanguage = (language) => {
-  localStorage.setItem(languageKey, language);
-};

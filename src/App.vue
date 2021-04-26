@@ -6,7 +6,6 @@
 export default {
   name: 'App',
   mounted() {
-    this.$i18n.locale = this.$store.state.language;
     this.$vuetify.theme.dark = this.$store.state.theme === 'dark';
   },
 };
